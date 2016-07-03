@@ -63,24 +63,26 @@ public class Controller {
                 XmlWriter xmlWriter = new XmlWriter();
                 xmlWriter.writeTransactions(transactions);
 
-                printDialog("XML soubor byl vygenerován", Alert.AlertType.INFORMATION);
+                printDialog("Soubor vygenerován", "XML soubor byl vygenerován", Alert.AlertType.INFORMATION);
             } catch(Exception e) {
-                printDialog("Nastala neočekávaná chyba", Alert.AlertType.ERROR);
+                printDialog("Nastala chyba", "Soubor nebyl vybrán", Alert.AlertType.ERROR);
             }
         }
     }
 
     private boolean validate() {
         if(tfAccountFrom.getText().isEmpty() || tfDate.getText().isEmpty()) {
-            printDialog("Textová pole musí být vyplněna.", Alert.AlertType.ERROR);
+            printDialog("Nastala chyba", "Textová pole musí být vyplněna.", Alert.AlertType.ERROR);
+
+            return false;
         }
 
         return true;
     }
 
-    private void printDialog(String message, Alert.AlertType type) {
+    private void printDialog(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
-        alert.setTitle("Nastala chyba");
+        alert.setTitle(title);
         alert.setHeaderText(message);
 
         alert.showAndWait();
