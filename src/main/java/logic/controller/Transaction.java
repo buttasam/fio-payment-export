@@ -8,9 +8,9 @@ public class Transaction {
     private String vs;
     private String swift;
 
-    private static final String accountFrom = "2600927896";
+    private String accountFrom;
     private static final String currency = "EUR";
-    private static final String date = "2016-06-13";
+    private String date;
     private static final String paymentType = "431008";
 
     public Transaction(String[] data) {
@@ -50,6 +50,14 @@ public class Transaction {
 
     public String getSwift() {
         return swift;
+    }
+
+    public void setAccountFrom(String accountFrom) {
+        this.accountFrom = accountFrom;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
