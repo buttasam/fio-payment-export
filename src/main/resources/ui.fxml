@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.controller.Controller">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="492.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.controller.Controller">
    <children>
       <Label layoutX="27.0" layoutY="14.0" prefHeight="34.0" prefWidth="315.0" text="Export XML pro hromadnou platbu do EU." />
-      <Button layoutX="249.0" layoutY="273.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="186.0" text="Button" />
+      <Button layoutX="249.0" layoutY="273.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="186.0" text="Vygenerovat" onAction="#handleBtnGenerate"/>
       <Button fx:id="btnUpload" layoutX="47.0" layoutY="273.0" mnemonicParsing="false" onAction="#handleBtnFile" prefHeight="34.0" prefWidth="152.0" text="Vyber soubor" />
-      <TextField layoutX="185.0" layoutY="87.0" prefHeight="27.0" prefWidth="217.0"  fx:id="tfAccountFrom"/>
+      <TextField fx:id="tfAccountFrom" layoutX="185.0" layoutY="87.0" prefHeight="27.0" prefWidth="217.0" />
       <Label layoutX="47.0" layoutY="92.0" prefHeight="16.0" prefWidth="89.0" text="Číslo účtu" />
       <Label layoutX="47.0" layoutY="164.0" text="Datum splatnosti" />
-      <TextField layoutX="185.0" layoutY="162.0" prefHeight="27.0" prefWidth="217.0" fx:id="tfDate" />
+      <TextField fx:id="tfDate" layoutX="185.0" layoutY="162.0" prefHeight="27.0" prefWidth="217.0" />
+      <Label fx:id="labelFileStatus" layoutX="47.0" layoutY="235.0" prefHeight="16.0" prefWidth="180.0" text="Soubor nevybrán" />
    </children>
 </AnchorPane>

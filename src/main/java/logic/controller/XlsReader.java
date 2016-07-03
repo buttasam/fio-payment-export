@@ -19,6 +19,9 @@ public class XlsReader {
     private FileInputStream file;
     private Workbook myWorkbook;
 
+    private String date;
+    private String accountFrom;
+
     public XlsReader(String path) throws IOException, InvalidFormatException {
         this.path = path;
         header = new ArrayList<>();
@@ -30,7 +33,10 @@ public class XlsReader {
     }
 
 
-    public void fillTransactions(ArrayList<Transaction> transactions) {
+    public void fillTransactions(ArrayList<Transaction> transactions, String date, String accountFrom) {
+
+        this.date = date;
+        this.accountFrom = accountFrom;
 
         Sheet mySheet = myWorkbook.getSheetAt(0);
         Iterator<Row> rowIterator = mySheet.iterator();
@@ -88,10 +94,10 @@ public class XlsReader {
                 rowList.get(vsIndex),
                 rowList.get(swiftIndex)
         );
+        transaction.setDate(date);
+        transaction.setAccountFrom(accountFrom);
 
         return transaction;
-
     }
-
 
 }
