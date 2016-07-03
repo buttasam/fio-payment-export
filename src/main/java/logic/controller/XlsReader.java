@@ -30,29 +30,28 @@ public class XlsReader {
     }
 
 
-
-    public void fillTransactions() {
+    public void fillTransactions(ArrayList<Transaction> transactions) {
 
         Sheet mySheet = myWorkbook.getSheetAt(0);
         Iterator<Row> rowIterator = mySheet.iterator();
 
         int i = 0;
 
-        while (rowIterator.hasNext()) {
+        while(rowIterator.hasNext()) {
             Row row = rowIterator.next();
 
             Iterator<Cell> cellIterator = row.cellIterator();
 
             ArrayList<String> rowList = new ArrayList<>();
 
-            while (cellIterator.hasNext()) {
+            while(cellIterator.hasNext()) {
 
                 Cell cell = cellIterator.next();
 
                 if(i == 0) {
                     header.add(cell.getStringCellValue());
                 } else {
-                    switch (cell.getCellType()) {
+                    switch(cell.getCellType()) {
                         case Cell.CELL_TYPE_STRING:
                             rowList.add(cell.getStringCellValue().toString());
                             break;
@@ -60,20 +59,39 @@ public class XlsReader {
                             Double value = cell.getNumericCellValue();
                             rowList.add(value.toString());
                             break;
-                        default :
-
+                        default:
+                            rowList.add("cannot-read");
+                            break;
                     }
                 }
-
-
             }
-            System.out.println(rowList);
+            if(i != 0) {
+                transactions.add(rowListToTransaction(rowList));
+            }
             i++;
         }
-
-        System.out.println(header + " " + header.indexOf("eura"));
     }
 
+
+    private Transaction rowListToTransaction(ArrayList<String> rowList) {
+        int amountIndex = header.indexOf("eura");
+        int ibanIndex = header.indexOf("ucetiban");
+        int ksIndex = header.indexOf("KS");
+        int vsIndex = header.indexOf("VS");
+        int swiftIndex = header.indexOf("swift");
+
+
+        Transaction transaction = new Transaction(
+                rowList.get(amountIndex),
+                rowList.get(ibanIndex),
+                rowList.get(ksIndex),
+                rowList.get(vsIndex),
+                rowList.get(swiftIndex)
+        );
+
+        return transaction;
+
+    }
 
 
 }

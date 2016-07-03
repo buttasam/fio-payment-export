@@ -24,6 +24,14 @@ public class Transaction {
     public Transaction() {
     }
 
+    public Transaction(String amount, String iban, String ks, String vs, String swift) {
+        this.amount = amount;
+        this.iban = iban;
+        this.ks = ks;
+        this.vs = vs;
+        this.swift = swift;
+    }
+
     public String getAmount() {
         return amount;
     }
