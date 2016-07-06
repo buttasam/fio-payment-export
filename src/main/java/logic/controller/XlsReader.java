@@ -1,7 +1,10 @@
 package logic.controller;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +20,7 @@ public class XlsReader {
 
     private File xlsFile;
     private FileInputStream file;
-    private Workbook myWorkbook;
+    private XSSFWorkbook myWorkbook;
 
     private String date;
     private String accountFrom;
@@ -28,7 +31,7 @@ public class XlsReader {
 
         xlsFile = new File(path);
         file = new FileInputStream(xlsFile);
-        myWorkbook = WorkbookFactory.create(file);
+        myWorkbook = new XSSFWorkbook(file);
 
     }
 
@@ -38,7 +41,7 @@ public class XlsReader {
         this.date = date;
         this.accountFrom = accountFrom;
 
-        Sheet mySheet = myWorkbook.getSheetAt(0);
+        XSSFSheet mySheet = myWorkbook.getSheetAt(0);
         Iterator<Row> rowIterator = mySheet.iterator();
 
         int i = 0;
@@ -81,10 +84,10 @@ public class XlsReader {
 
     private Transaction rowListToTransaction(ArrayList<String> rowList) {
         int amountIndex = header.indexOf("eura");
-        int ibanIndex = header.indexOf("ucetiban");
-        int ksIndex = header.indexOf("KS");
-        int vsIndex = header.indexOf("VS");
-        int swiftIndex = header.indexOf("swift");
+        int ibanIndex = header.indexOf("IBAN");
+        int ksIndex = header.indexOf("Konst.sym.");
+        int vsIndex = header.indexOf("Var.sym.");
+        int swiftIndex = header.indexOf("SWIFT");
 
 
         Transaction transaction = new Transaction(

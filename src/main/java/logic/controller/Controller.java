@@ -29,12 +29,14 @@ public class Controller {
     private FileChooser fileChooser;
 
     private String filePath;
+    private String dirPath;
+
     private String date;
     private String accountFrom;
 
     public Controller() {
         fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Soubory XLS", "*.xls"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Soubory XLS", "*.xlsx"));
     }
 
     @FXML
@@ -43,6 +45,8 @@ public class Controller {
         File file = fileChooser.showOpenDialog(stage);
         if(file != null) {
             filePath = file.getAbsolutePath();
+            dirPath = file.getAbsolutePath().replaceAll(file.getName(), "");
+
             String fileName = file.getName();
             labelFileStatus.setText(fileName);
         }
@@ -61,7 +65,7 @@ public class Controller {
                 reader.fillTransactions(transactions, date, accountFrom);
 
                 XmlWriter xmlWriter = new XmlWriter();
-                xmlWriter.writeTransactions(transactions);
+                xmlWriter.writeTransactions(transactions, dirPath);
 
                 printDialog("Soubor vygenerován", "XML soubor byl vygenerován", Alert.AlertType.INFORMATION);
             } catch(Exception e) {
