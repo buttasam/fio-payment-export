@@ -1,5 +1,6 @@
 package logic.controller;
 
+import org.apache.commons.math3.util.Precision;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -89,9 +90,11 @@ public class XlsReader {
         int vsIndex = header.indexOf("Var.sym.");
         int swiftIndex = header.indexOf("SWIFT");
 
+        Double amount = Double.parseDouble(rowList.get(amountIndex));
+        amount = Precision.round(amount, 2);
 
         Transaction transaction = new Transaction(
-                rowList.get(amountIndex),
+                amount.toString(),
                 rowList.get(ibanIndex),
                 rowList.get(ksIndex),
                 rowList.get(vsIndex),

@@ -69,7 +69,7 @@ public class Controller {
 
                 printDialog("Soubor vygenerován", "XML soubor byl vygenerován", Alert.AlertType.INFORMATION);
             } catch(Exception e) {
-                printDialog("Nastala chyba", "Soubor nebyl vybrán", Alert.AlertType.ERROR);
+                printDialog("Nastala chyba", "Soubor nebyl vybrán nebo není validní", Alert.AlertType.ERROR);
             }
         }
     }
