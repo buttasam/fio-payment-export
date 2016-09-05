@@ -77,8 +77,8 @@ public class Transaction {
                 "<currency>" + currency + "</currency>\n" +
                 "<amount>" + amount.replace(",", ".") + "</amount>\n" +
                 "<accountTo>" + iban + "</accountTo>\n" +
-                "<ks>" + ks + "</ks>\n" +
-                "<vs>" + vs + "</vs>\n" +
+                "<ks>" + Util.removeDecimalString(ks) + "</ks>\n" +
+                "<vs>" + Util.removeDecimalString(vs) + "</vs>\n" +
                 "<date>" + date + "</date>\n" +
                 "<comment>" + "</comment>\n" +
                 "<benefName>" + "</benefName>\n" +
